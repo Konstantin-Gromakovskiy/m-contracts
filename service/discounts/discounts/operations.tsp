@@ -11,5 +11,5 @@ interface Discounts {
   @post
   @route("/GetDiscountsByFilter")
   @operationId("GetDiscountsByFilter")
-  GetDiscountsByFilter(): GetDiscountsResponse;
+  GetDiscountsByFilter(@body body: DiscountsFilterParams): GetDiscountsResponse;
 }

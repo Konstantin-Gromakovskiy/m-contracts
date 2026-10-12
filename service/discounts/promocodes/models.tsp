@@ -40,6 +40,26 @@ model PromocodeDto {
   usage: DiscountUsage;
 }
 
+@doc("""
+  Параметры получения промокодов по фильтрам. Фильтры объединяются через И.
+  Пустой массив означает, что фильтр не применяется.
+  """)
+@example(#{
+  ids: #["2f6a1c7e-5b1d-4c3a-9a53-0d6c4f1f9a10"],
+  clientIds: #["7b9e3a52-1c4d-4e8f-8a6b-3d2f5c9e1a47"],
+})
+model PromocodesFilterParams {
+  @doc("Id промокодов. При пустом массиве возвращаются все промокоды")
+  ids: Primitives.Uuid[];
+
+  @doc("""
+    Id клиентов: возвращаются промокоды, доступные хотя бы одному из них, то есть промокоды
+    без ограничения по аудитории (`audience.allowedClientIds` пуст) и промокоды, где клиент
+    указан в `audience.allowedClientIds`. При пустом массиве фильтр не применяется
+    """)
+  clientIds: Primitives.Uuid[];
+}
+
 @doc("Успешный ответ с получением списка промокодов.")
 model GetPromocodesResponse {
   @statusCode statusCode: 200;

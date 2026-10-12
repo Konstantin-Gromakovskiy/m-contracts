@@ -11,5 +11,5 @@ interface Promocodes {
   @post
   @route("/GetPromocodesByFilter")
   @operationId("GetPromocodesByFilter")
-  GetPromocodesByFilter(): GetPromocodesResponse;
+  GetPromocodesByFilter(@body body: PromocodesFilterParams): GetPromocodesResponse;
 }

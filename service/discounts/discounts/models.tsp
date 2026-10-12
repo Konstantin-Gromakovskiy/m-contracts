@@ -37,6 +37,16 @@ model DiscountDto {
   usage: DiscountUsage;
 }
 
+@doc("""
+  Параметры получения акций по фильтрам. Фильтры объединяются через И.
+  Пустой массив означает, что фильтр не применяется.
+  """)
+@example(#{ ids: #["2f6a1c7e-5b1d-4c3a-9a53-0d6c4f1f9a10"] })
+model DiscountsFilterParams {
+  @doc("Id акций. При пустом массиве возвращаются все акции")
+  ids: Primitives.Uuid[];
+}
+
 @doc("Успешный ответ с получением списка акций.")
 model GetDiscountsResponse {
   @statusCode statusCode: 200;
