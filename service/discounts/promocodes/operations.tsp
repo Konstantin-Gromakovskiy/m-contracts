@@ -9,7 +9,7 @@ namespace DiscountsService.Promocodes;
 interface Promocodes {
   @doc("Получение промокодов")
   @post
-  @route("/GetPromocodes")
-  @operationId("GetPromocodes")
-  GetPromocodes(): GetPromocodesResponse;
+  @route("/GetPromocodesByFilter")
+  @operationId("GetPromocodesByFilter")
+  GetPromocodesByFilter(): GetPromocodesResponse;
 }

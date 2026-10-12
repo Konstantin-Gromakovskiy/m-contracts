@@ -120,6 +120,12 @@ model OptionRule {
   humanRange: HumanRange | null;
 }
 
+@doc("Источник (интерфейс), в котором доступна скидка: приложение или виджет")
+union DiscountSource {
+  Sources.Source.Mobile,
+  Sources.Source.Widget,
+}
+
 @doc("""
   Условия активации скидки. Для всех списков пустой массив означает «все»,
   для `null` — «без ограничения».
@@ -136,9 +142,9 @@ model DiscountConditions {
   @doc("Опции, на которые распространяется скидка. Пустой массив — все опции.")
   options: OptionRule[];
 
-  @doc("Источники (интерфейсы), в которых доступна скидка. Пустой массив — все источники.")
-  @example(#[Sources.Source.Web, Sources.Source.Mobile])
-  sources: Sources.Source[];
+  @doc("Источники (интерфейсы), в которых доступна скидка: приложение или виджет. Пустой массив — все источники.")
+  @example(#[Sources.Source.Mobile, Sources.Source.Widget])
+  sources: DiscountSource[];
 
   @doc("Дни недели, в которые действует скидка. Пустой массив — все дни.")
   daysOfWeek: DayOfWeek[];
@@ -156,9 +162,6 @@ model DiscountConditions {
   @example(24)
   @minValue(1)
   hoursBeforeStart: int32 | null;
-
-  @doc("Скидка действует только на дополнительные позиции заказа")
-  additionalPositionsOnly: boolean;
 }
 
 @doc("Клиенты, которым разрешено использовать скидку")

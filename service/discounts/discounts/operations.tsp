@@ -9,7 +9,7 @@ namespace DiscountsService.Discounts;
 interface Discounts {
   @doc("Получение акций")
   @post
-  @route("/GetDiscounts")
-  @operationId("GetDiscounts")
-  GetDiscounts(): GetDiscountsResponse;
+  @route("/GetDiscountsByFilter")
+  @operationId("GetDiscountsByFilter")
+  GetDiscountsByFilter(): GetDiscountsResponse;
 }
