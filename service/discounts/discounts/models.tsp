@@ -24,8 +24,8 @@ model DiscountDto {
   @maxLength(255)
   description: string;
 
-  @doc("Значение скидки")
-  value: DiscountValue;
+  @doc("Область применения и значение скидки")
+  application: DiscountApplication;
 
   @doc("Ограничения на количество применений")
   limits: DiscountLimits;

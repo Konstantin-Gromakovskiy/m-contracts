@@ -3,25 +3,45 @@ import "../../common/sources.tsp";
 
 namespace DiscountsService.Shared;
 
-@doc("Тип значения скидки")
-enum DiscountValueType {
-  @doc("Скидка в процентах")
-  Percent: "percent",
-
-  @doc("Скидка в рублях")
-  Fixed: "fixed",
-}
-
 @doc("Значение скидки. Задаётся либо в процентах, либо в рублях.")
 model DiscountValue {
-  @doc("Тип значения скидки")
-  @example(DiscountValueType.Percent)
-  type: DiscountValueType;
+  @doc("Признак скидки в процентах")
+  @example(true)
+  asPercent: boolean;
 
   @doc("Размер скидки. Для `percent` — минимум 5, для `fixed` — минимум 100 рублей.")
   @example(10)
   @minValue(5)
   value: int32;
+}
+
+@doc("Область применения скидки")
+union DiscountApplication {
+  OrderDiscountApplication,
+  TimeDiscountApplication,
+  PositionDiscountApplication,
+  TimeAndPositionDiscountApplication,
+}
+
+@doc("Скидка применяется ко всему заказу")
+model OrderDiscountApplication {
+  onOrder: DiscountValue;
+}
+
+@doc("Скидка применяется ко времени")
+model TimeDiscountApplication {
+  onTime: DiscountValue;
+}
+
+@doc("Скидка применяется к позиции")
+model PositionDiscountApplication {
+  onPosition: DiscountValue;
+}
+
+@doc("Скидка применяется ко времени и позиции")
+model TimeAndPositionDiscountApplication {
+  onTime: DiscountValue;
+  onPosition: DiscountValue;
 }
 
 @doc("Ограничения на количество применений скидки. `null` — без ограничений.")
@@ -105,11 +125,8 @@ model OptionRule {
   для `null` — «без ограничения».
   """)
 model DiscountConditions {
-  @doc("Объекты, на которых действует скидка. Пустой массив — все объекты.")
-  objectIds: Primitives.Uuid[];
-
-  @doc("Площадки и услуги, на которых действует скидка. Пустой массив — все площадки и услуги объекта.")
-  resourceIds: Primitives.Uuid[];
+  @doc("Комнаты, на которых действует скидка. Пустой массив — все комнаты.")
+  roomIds: Primitives.Uuid[];
 
   @doc("Минимальная длительность заказа в часах")
   @example(1)
@@ -130,7 +147,7 @@ model DiscountConditions {
   timeRanges: TimeRange[];
 
   @doc("Скидка действует, только если дата создания заказа совпадает с датой заказа")
-  sameDayOnly: boolean;
+  isToday: boolean;
 
   @doc("Календарный период действия. `null` — без ограничения по датам.")
   period: DatePeriod | null;
