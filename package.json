@@ -1,0 +1,29 @@
+{
+  "name": "musbooking-contracts",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "compile": "tsp compile .",
+    "compile:watch": "tsp compile . --watch",
+    "serve": "node scripts/serve-schema.mjs",
+    "preview": "npm run compile && npm run serve",
+    "dev": "concurrently --kill-others-on-fail --names compiler,scalar --prefix-colors cyan,green \"npm run compile:watch\" \"npm run serve\"",
+    "docker": "docker build -t musbooking-openapi . && docker run --rm -p ${DOCKER_PORT:-8080}:80 musbooking-openapi"
+  },
+  "dependencies": {
+    "@typespec/compiler": "^1.14.0",
+    "@typespec/http": "^1.14.0",
+    "@typespec/openapi": "^1.14.0",
+    "@typespec/openapi3": "^1.14.0",
+    "@typespec/rest": "^0.84.0"
+  },
+  "packageManager": "npm@12.0.1+sha512.2f94fd8bf600416416a934bfc59c4991e8bff7372ef7d842784e2a8b8d48c81555ee645069ddea73625fb8e92dc261feab0188fd5dab6c22fefd46316f5f9140",
+  "devDependencies": {
+    "@scalar/api-reference": "^1.69.0",
+    "@scalar/cli": "^2.0.1",
+    "@types/node": "^26.1.2",
+    "concurrently": "^10.0.3",
+    "live-server": "^1.2.2"
+  }
+}

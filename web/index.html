@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Musbooking API</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%98%3C/text%3E%3C/svg%3E"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Статика: Scalar-бандл и OpenAPI-спецификации отдаёт nginx (см. docker/nginx.conf).
+         standalone.js самодостаточен (без рантайм-CDN и ленивых чанков).  -->
+    <div id="app"></div>
+    <script src="/scalar.js"></script>
+    <script>
+      Scalar.createApiReference("#app", {
+        sources: [
+          {
+            title: "Identity Service",
+            url: "/IdentityService.json",
+          },
+          {
+            title: "ABAC Service",
+            url: "/AbacService.json",
+          },
+          {
+            title: "Clients Service",
+            url: "/ClientsService.json",
+          },
+          {
+            title: "Notifications Service",
+            url: "/NotificationsService.json",
+          },
+          {
+            title: "Partner Zones Service",
+            url: "/PartnerZonesService.json",
+          },
+          {
+            title: "TypeSpec Playground",
+            url: "/PlaygroundService.json",
+          },
+          {
+            title: "Positions Service",
+            url: "/PositionsService.json",
+          },
+          {
+            title: "Discounts Service",
+            url: "/DiscountsService.json",
+          },
+        ],
+        theme: "default",
+        layout: "modern",
+      });
+    </script>
+  </body>
+</html>
