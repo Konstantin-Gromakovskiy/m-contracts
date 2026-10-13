@@ -126,6 +126,14 @@ union DiscountSource {
   Sources.Source.Widget,
 }
 
+model ActiveIntervals {
+  @doc("Дни недели, в которые действует скидка. Пустой массив — все дни.")
+  daysOfWeek: DayOfWeek[];
+
+  @doc("Время суток, в которое действует скидка. Пустой массив — весь день.")
+  timeRanges: TimeRange | null;
+}
+
 @doc("""
   Условия активации скидки. Для всех списков пустой массив означает «все»,
   для `null` — «без ограничения».
@@ -146,14 +154,10 @@ model DiscountConditions {
   @example(#[Sources.Source.Mobile, Sources.Source.Widget])
   sources: DiscountSource[];
 
-  @doc("Дни недели, в которые действует скидка. Пустой массив — все дни.")
-  daysOfWeek: DayOfWeek[];
-
-  @doc("Время суток, в которое действует скидка. Пустой массив — весь день.")
-  timeRanges: TimeRange[];
-
   @doc("Скидка действует, только если дата создания заказа совпадает с датой заказа")
   isToday: boolean;
+
+  interval: ActiveIntervals;
 
   @doc("Календарный период действия. `null` — без ограничения по датам.")
   period: DatePeriod | null;

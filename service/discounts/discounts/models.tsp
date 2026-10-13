@@ -32,9 +32,6 @@ model DiscountDto {
 
   @doc("Условия активации")
   conditions: DiscountConditions;
-
-  @doc("Статистика использования")
-  usage: DiscountUsage;
 }
 
 @doc("""
