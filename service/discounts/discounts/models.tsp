@@ -41,6 +41,7 @@ model DiscountDto {
 @example(#{
   ids: #["2f6a1c7e-5b1d-4c3a-9a53-0d6c4f1f9a10"],
   roomIds: #["c1d2e3f4-0a1b-4c2d-8e3f-5a6b7c8d9e01"],
+  partnerZoneId: "9d4b7e21-3a5c-4f68-b1e2-6c8a0d3f5b72",
 })
 model DiscountsFilterParams {
   @doc("Id акций. При пустом массиве возвращаются все акции")
@@ -52,6 +53,9 @@ model DiscountsFilterParams {
     указана в `conditions.roomIds`. При пустом массиве фильтр не применяется
     """)
   roomIds: Primitives.Uuid[];
+
+  @doc("Id партнёрской зоны: возвращаются акции, действующие в этой зоне")
+  partnerZoneId: Primitives.Uuid;
 }
 
 @doc("Успешный ответ с получением списка акций.")
